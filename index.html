@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VR Car Drive Simulation</title>
+        <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script
+          src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script> 
+        <script src="./Drive.js"></script>
+    </head>
+    <body>
+        <a-scene id="scene" background="color: lightblue">
+            <!--Assets-->
+            <a-assets>
+                <a-asset-item id="city" src="./assets/low_poly_city/scene.gltf"></a-asset-item>
+                <a-asset-item id="wheel" src="./assets/steering_wheel/scene.gltf"></a-asset-item>
+                <!--<audio id="horn" src="./assets/sound/car-horn.mp3"></audio>
+                <audio id="driving" src="./assets/sound/driving.mp3"></audio>-->
+            </a-assets>
+
+            <!--Sounds-->
+            <!--<a-entity id="sound1" sound="src: #driving; poolSize:2; autoplay: false; volume: 12; loop: false"></a-entity>-->
+
+            <!--Light-->
+            <a-entity light="type: ambient; color: white; intensity: 1.5;"></a-entity>
+            <a-entity light="type: directional; color: yellow; intensity: 0.6; position:0 15 20"></a-entity>
+
+            <!--City Scene Environment-->
+            <a-entity id="city-set" gltf-model="#city" position="10 -2.5 -20" scale="1 1 1" rotation="0 90 0"></a-entity>
+
+            <!--<a-plane id="ground" geometry="height: 500; width: 200; depth: 15;" repeat="5 5" position="0 -10 -150" color="yellow" visible="false"></a-plane>-->
+
+            <a-entity id="camera" camera position="0 1.6 0" look-controls="pointerLookEnabled: false">
+                <a-entity id="steering-wheel" gltf-model="#wheel" position="0.9 -1.8 -1" scale="5 5 1" rotation="0 0 0" drive></a-entity>
+
+                <a-box id="break" src="./assets/break.png" position="-1.2 -0.65 -1" scale="0.2 0.2 0" rotation="0 180 0"></a-box>
+
+                <a-box id="acc" src="./assets/acc.png" position="-0.9 -0.55 -1" scale="0.2 0.4 0" rotation="0 180 0" color="grey" velocity="0 0 0" drive></a-box>
+
+                <a-entity id="stop" position="-6.9 -5.7 -7.16344"
+                    text="font: kelsonsans; width:5; height: 2;value: 'Spacebar key' ">
+                </a-entity>
+
+                <a-entity id="move" position="-4.7 -5.7 -7.16344"
+                    text="font: kelsonsans; width:5; height: 2;value: 'Up Arrow Key' ">
+                </a-entity>
+
+                <a-entity id="speed" position="4 -5.3 -7.16344" text="font: kelsonsans; width:10; height: 5;value: 10">
+                    <a-entity id="unit" position="1 0 0" text="font: kelsonsans; width:10; height: 5; value: km/h"></a-entity>
+                </a-entity>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
